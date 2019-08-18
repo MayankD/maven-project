@@ -21,7 +21,7 @@ pipeline{
                     checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
                     echo "give test report"
                     junit '**/surefire-reports/*.xml'
-                    echo "archive"
+                    echo "Artifacts"
                     archive '**/webapp.war'
                 }
             }
@@ -29,6 +29,7 @@ pipeline{
         stage ('Deploy'){
             steps{
                 echo "This is Deploy stage"
+                build 'dev_deploy'
             }
         }
     }
