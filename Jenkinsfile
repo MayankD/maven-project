@@ -21,6 +21,8 @@ pipeline{
                     checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
                     echo "give test report"
                     junit '**/surefire-reports/*.xml'
+                    echo "archive"
+                    archive '**/webapp.war'
                 }
             }
         }
