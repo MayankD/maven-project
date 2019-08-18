@@ -28,6 +28,9 @@ pipeline{
         }
         stage ('Deploy'){
             steps{
+                timeout(time: 90, unit: 'SECONDS') {
+                    input 'Do you want to continue deploy on dev server?'
+                }
                 echo "This is Deploy stage"
                 build 'dev_deploy'
             }
