@@ -14,8 +14,14 @@ pipeline{
             steps{
                 echo "This is Build stage"
                 sh label: '', script: 'mvn clean package checkstyle:checkstyle'
-                checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
-                junit '**/surefire-reports/*.xml'
+            }
+            post{
+                success{
+                    echo "check code quality"
+                    checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
+                    echo "give test report"
+                    junit '**/surefire-reports/*.xml'
+                }
             }
         }
         stage ('Deploy'){
